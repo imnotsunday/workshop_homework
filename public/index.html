@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="request-form-btn">
+            <a href="#">Request Form</a>
+        </div>
+
+        <div class="logo">
+            <img src="image/Emblem_of_Thammasat_University.svg (1).png" alt="University Logo">
+        </div>
+        <h1>WELCOME</h1>
+        <div class="login-box">
+            <form>
+                <div class="input-box">
+                    <input type="text" id="username" placeholder="Username" required>
+                </div>
+                <div class="input-box">
+                    <input type="password" id="password" placeholder="Password" required>
+                </div>
+                <select class="dropdown-field" id="role" required>
+                    <option value="" disabled selected>Select Role</option>
+                    <option value="Student">Student</option>
+                    <option value="Teacher">Teacher</option>
+                    <option value="Admin">Admin</option>
+            </select>
+                <div class="button-box">
+                    <button type="submit">LOGIN</button>
+                </div>
+            </form>
+        </div>
+        <div id="output"></div>
+        <div class="contact">
+            <a href="#">Contact us</a>
+        </div>
+    </div>
+</body>
+</html>
