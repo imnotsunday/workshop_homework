@@ -1,39 +1,31 @@
-document.getElementById('loginForm').addEventListener('submit', async function(event) {
-    event.preventDefault(); // Prevent form from submitting
-
-    // Get the values of username, password, and role
-    var username = document.getElementById('username').value;
-    var password = document.getElementById('password').value;
-    var role = document.getElementById('role').value;
-
-    // Prepare the data to send in the request
-    var loginData = {
-        username: username,
-        password: password,
-        role: role
-    };
-
-    try {
-        // Send the data to the backend API
-        var response = await fetch('https://your-backend-api.com/api/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(loginData)
-        });
-
-        if (response.ok) {
-            // Handle success response
-            var result = await response.json();
-            document.getElementById('output').innerHTML = `<strong>Login successful!</strong><br>Token: ${result.token}`;
-        } else {
-            // Handle error response
-            var error = await response.json();
-            document.getElementById('output').innerHTML = `<span class="error">Error: ${error.message}</span>`;
-        }
-    } catch (err) {
-        // Handle any network errors
-        document.getElementById('output').innerHTML = `<span class="error">Network error: ${err.message}</span>`;
-    }
-});
+function callApi() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const loginData = {};
+    loginData.UserName = username;
+    loginData.PassWord = password;
+    var jsonData = JSON.stringify(loginData);
+    //const apiUrl = 'https://restapi.tu.ac.th/api/v1/auth/Ad/verify'; 
+    fetch('https://restapi.tu.ac.th/api/v1/auth/Ad/verify2', {
+         method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Application-Key': 'TUe60e210564670c9cf7c526b6535e93290f52b5d6ceccbc3a62c0adefc1dd0ed2bfda4102770c142c52ec699204487bab'
+        },
+        body: jsonData,
+    })
+    .then(response => response.json())
+    .then(data => {
+        const resultDiv = document.getElementById('output');
+        resultDiv.innerHTML = `
+            <p><strong>Status :</strong> ${data.status ? 'Success' : 'Failed'}</p>
+            <p><strong>Name :</strong> ${data.displayname_en || 'N/A'}</p>
+            <p><strong>Username :</strong> ${data.username|| 'N/A'}</p>
+        `;
+    })
+    .catch(error => {
+        console.error('Error fetching data:', error);
+        const resultDiv = document.getElementById('output');
+        resultDiv.innerHTML = '<p>Error fetching data. Please try again.</p>';
+    });
+}
